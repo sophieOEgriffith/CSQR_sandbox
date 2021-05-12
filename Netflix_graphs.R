@@ -1,5 +1,7 @@
+require(tidyverse)
+
 ##read and subset data
-data <- read.csv("netflix_titles.csv")
+data <- read_csv("netflix_titles.csv")
 
 summary(data)
 data$type <- as.factor(data$type)
@@ -21,6 +23,7 @@ summary(USmovies)
 
 ##visualize movie ratings
 
+#subset to include only G, PG, PG-13, R
 USmovies$rating <- as.factor(USmovies$rating)
 summary(USmovies)
 
@@ -37,4 +40,31 @@ USmov_rat <-subset(USmov_rat, USmov_rat$rating != "")
 
 summary(USmov_rat)
 
-tab1 <- table(USmov_rat, USmov_rat$release_year)
+#table of duration vs year
+
+tab1 <- table(USmov_rat$duration, USmov_rat$release_year)
+tab1
+
+summary(USmov_rat$duration)
+
+#scatterplot of duration over year
+####need to rewrite duration as class numeric - requires dropping "min"
+
+duration <- str_split_fixed(USmov_rat$duration, " ", 2)
+head(duration)
+
+USmov_rat <- cbind(USmov_rat, duration)
+summary(USmov_rat)
+
+
+USmov_rat <- USmov_rat[,c(1:7,11,9,10)]
+names(USmov_rat)[names(USmov_rat)=="1"] <- "duration"
+USmov_rat$duration <- as.numeric(USmov_rat$duration)
+
+ggplot(data = USmov_rat, mapping = aes(x = release_year, y = duration, color = rating, shape = rating)) +
+  geom_point(alpha = .75) +
+  theme(panel.background = element_rect(), plot.background = element_blank()) +
+  scale_y_continuous(name ="Film Duration", n.breaks = 12) +
+  scale_x_continuous(name = "Release Year", n.breaks = 8) 
+  
+  
