@@ -65,6 +65,8 @@ ggplot(data = USmov_rat, mapping = aes(x = release_year, y = duration, color = r
   geom_point(alpha = .75) +
   theme(panel.background = element_rect(), plot.background = element_blank()) +
   scale_y_continuous(name ="Film Duration", n.breaks = 12) +
-  scale_x_continuous(name = "Release Year", n.breaks = 8) 
-  
+  scale_x_continuous(name = "Release Year", n.breaks = 8) +
+  scale_color_discrete(name = "Film Rating") +
+  scale_shape_discrete(name = "Film Rating") +
+  ggtitle("Duration of U.S. Netflix Films by Rating (1955 - 2020)", subtitle = "1955 - 2020")
   
