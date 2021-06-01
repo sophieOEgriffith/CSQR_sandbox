@@ -1,7 +1,7 @@
 require(tidyverse)
 
 ##read and subset data
-data <- read_csv("netflix_titles.csv")
+data <- read_csv("raw-data/netflix_titles.csv")
 
 summary(data)
 data$type <- as.factor(data$type)
