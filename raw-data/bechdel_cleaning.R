@@ -59,6 +59,8 @@ bechdel_data %>%
 bechdel_data %>%
   summary()
 
+View(bechdel_data)
+
 ##write to csv
 
 bechdel_data %>%
